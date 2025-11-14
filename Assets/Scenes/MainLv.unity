@@ -830,7 +830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &503302683
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,14 +1179,15 @@ MonoBehaviour:
   checkpointChunkPrefab: {fileID: 3627197113184551178, guid: 29f2573eac7ee8746ae05062803a7ea5, type: 3}
   chunkParent: {fileID: 78889546}
   scoreManager: {fileID: 1876217372}
-  startingChunksAmount: 12
-  checkpointChunkInterval: 12
-  chunkLength: 10
+  startingChunksAmount: 10
+  checkpointChunkInterval: 10
+  chunkLength: 8
   moveSpeed: 10
   minMoveSpeed: 2
   maxMoveSpeed: 20
   minGravityZ: -22
   maxGravityZ: -2
+  poolSize: 10
 --- !u!4 &843073317
 Transform:
   m_ObjectHideFlags: 0
@@ -1508,8 +1509,10 @@ MonoBehaviour:
   - {fileID: 8789762459076682380, guid: d6b54257380cd9846803ef368ab6332c, type: 3}
   obstacleSpawnTime: 2
   minObstacleSpawnTime: 0.2
-  ObstacleParent: {fileID: 78889546}
+  ObstacleParent: {fileID: 1043695657}
   spawnWidth: 4
+  poolSizePerPrefab: 10
+  obstacleLifetime: 10
 --- !u!4 &1043695657
 Transform:
   m_ObjectHideFlags: 0
