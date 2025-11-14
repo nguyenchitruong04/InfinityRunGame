@@ -70,8 +70,7 @@ public class Chunk : MonoBehaviour
             float spawnPositionZ = topOfChunkZ - (i * coinSeparationLength);
             Vector3 spawnPosition1 = new Vector3(lanes[selectedLane], transform.position.y, spawnPositionZ);
             GameObject coinObj = Instantiate(coinPrefab, spawnPosition1, Quaternion.identity, this.transform);
-            Coin newcoin = coinObj.GetComponent<Coin>();
-            newcoin.Init(scoreManager);
+            
         }
     }
     

@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointTimeExtension: 10
+  obstacleSpawnDecreaseAmount: 0.2
 --- !u!1 &4022299227486611544
 GameObject:
   m_ObjectHideFlags: 0

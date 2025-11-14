@@ -192,7 +192,7 @@ MonoBehaviour:
   applePrefab: {fileID: 4505434090084471738, guid: 967675e45b343544a8a3314e772a2bbe, type: 3}
   coinPrefab: {fileID: 4505434090084471738, guid: e0f046d31f731cf4098bd076cfa647f9, type: 3}
   appleSpawnChance: 0.12
-  coinSpawnChance: 0.3
+  coinSpawnChance: 1
   coinSeparationLength: 3
   lanes:
   - -3

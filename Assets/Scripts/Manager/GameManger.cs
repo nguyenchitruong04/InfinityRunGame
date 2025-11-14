@@ -17,6 +17,18 @@ public class GameManger : MonoBehaviour
     void Start() 
     {
         timeLeft = startTime;
+        GameEvents.OnCheckpointReached += HandleCheckpointReached;
+    }
+
+    void OnDestroy()
+    {
+        GameEvents.OnCheckpointReached -= HandleCheckpointReached;
+    }
+
+    void HandleCheckpointReached(float timeExtension, float spawnDecreaseAmount)
+    {
+        IncreaseTime(timeExtension);
+        Debug.Log($"[GameManager] Received checkpoint event: +{timeExtension}s");
     }
 
     void Update()

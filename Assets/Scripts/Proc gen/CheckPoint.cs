@@ -5,30 +5,21 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] float checkpointTimeExtension = 5f;
     [SerializeField] float obstacleSpawnDecreaseAmount = 0.2f;
 
-    GameManger gameManager;
-    ObstacleSpawner obstacleSpawner;
-   
     const string playerString = "Player";
-
-    void Start()
-    {
-        gameManager = FindFirstObjectByType<GameManger>();
-        obstacleSpawner = FindFirstObjectByType<ObstacleSpawner>();
-    }
+    bool hasBeenTriggered = false; // Tránh trigger nhiều lần
 
     void OnTriggerEnter(Collider other) 
     {
-        if (other.CompareTag(playerString)) 
+        if (other.CompareTag(playerString) && !hasBeenTriggered) 
         {
-            if (gameManager != null)
-            {
-                gameManager.IncreaseTime(checkpointTimeExtension);
-                obstacleSpawner.DecreaseobstacleSpawnTime(obstacleSpawnDecreaseAmount);
-
-            }
-           
-           
+            hasBeenTriggered = true;
+            GameEvents.CheckpointReached(checkpointTimeExtension, obstacleSpawnDecreaseAmount);
+            Debug.Log($"Checkpoint triggered! Time+{checkpointTimeExtension}s");
         }    
+    }
+    void OnDisable()
+    {
+        hasBeenTriggered = false;
     }
 }
 

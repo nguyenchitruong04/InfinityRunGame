@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
-public class Coin : PickUp
+public class Coin : MonoBehaviour
 {
-    ScoreManager scoreManager;
-    public void Init(ScoreManager scoreManager)
-    {
-        this.scoreManager = scoreManager;
-    }
+    [SerializeField] int ScoreValue = 100;
 
-    protected override void OnPickUp()
+    const string PLAYER_TAG = "Player";
+    void OnTriggerEnter(Collider other)
     {
-        scoreManager.AddScore(100);
-        Destroy(gameObject);
+        if (other.CompareTag(PLAYER_TAG))
+        {
+            ScoreManager.Instance?.AddScore(ScoreValue);
+            Destroy(gameObject);
+        }
     }
 }
