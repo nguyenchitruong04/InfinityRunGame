@@ -58,6 +58,7 @@ public class GameManger : MonoBehaviour
     {
         gameOver = true;
         playerController.enabled = false;
+        ScoreManager.Instance.SaveHighScore();
         GOmenu.SetActive(true);
         Time.timeScale = .1f;
         Cursor.visible = true;
