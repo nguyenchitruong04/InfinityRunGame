@@ -12490,7 +12490,7 @@ MonoBehaviour:
   playerController: {fileID: 1750073716}
   timeText: {fileID: 1622300551}
   gameOverText: {fileID: 1160382755}
-  startTime: 5
+  startTime: 10
   GOmenu: {fileID: 1758301928}
 --- !u!1 &1969742042
 GameObject:

@@ -166,16 +166,16 @@ public class LevelGenerator : MonoBehaviour
         return spawnPositionZ;
     }
 
-    void MoveChunks() 
+   void MoveChunks() 
     {
-        for (int i = 0; i < chunks.Count; i++)
+        for (int i = chunks.Count - 1; i >= 0; i--)
         {
             GameObject chunk = chunks[i];
             chunk.transform.Translate(-transform.forward * (moveSpeed * Time.deltaTime));
 
             if (chunk.transform.position.z <= Camera.main.transform.position.z - chunkLength)
             {
-                chunks.Remove(chunk);
+                chunks.RemoveAt(i);
                 ChunkPoolInfo poolInfo = chunk.GetComponent<ChunkPoolInfo>();
                 if (poolInfo != null && poolInfo.originalPrefab != null)
                 {
