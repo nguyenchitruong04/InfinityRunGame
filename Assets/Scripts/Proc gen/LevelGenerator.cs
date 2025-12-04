@@ -152,18 +152,13 @@ public class LevelGenerator : MonoBehaviour
 
     float CalculateSpawnPositionZ()
     {
-        float spawnPositionZ;
-
         if (chunks.Count == 0)
         {
-            spawnPositionZ = transform.position.z;
+            return transform.position.z;
         }
-        else
-        {
-            spawnPositionZ = chunks[chunks.Count - 1].transform.position.z + chunkLength;
-        }
-
-        return spawnPositionZ;
+        GameObject lastChunkGO = chunks[chunks.Count - 1];
+        Chunk lastChunkScript = lastChunkGO.GetComponent<Chunk>();
+        return lastChunkGO.transform.position.z + lastChunkScript.chunkLength;
     }
 
    void MoveChunks() 

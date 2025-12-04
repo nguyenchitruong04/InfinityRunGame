@@ -10,6 +10,7 @@ public class Chunk : MonoBehaviour
     [SerializeField] float coinSpawnChance = 0.25f;
     [SerializeField] float coinSeparationLength = 1f;
     [SerializeField] float[] lanes = new float[] { -2.5f, 0f, 2.5f };
+    [SerializeField] public float chunkLength = 10f;
     List<int> availableLanes = new List<int> { 0, 1, 2 };
     LevelGenerator levelGen;
     ScoreManager scoreManager;
