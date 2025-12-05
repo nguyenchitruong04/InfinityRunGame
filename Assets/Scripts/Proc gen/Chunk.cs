@@ -11,19 +11,64 @@ public class Chunk : MonoBehaviour
     [SerializeField] float coinSeparationLength = 1f;
     [SerializeField] float[] lanes = new float[] { -2.5f, 0f, 2.5f };
     [SerializeField] public float chunkLength = 10f;
+    
     List<int> availableLanes = new List<int> { 0, 1, 2 };
+    List<GameObject> spawnedObjects = new List<GameObject>(); // Track spawned objects
     LevelGenerator levelGen;
     ScoreManager scoreManager;
+    bool isInitialized = false;
+    
     void Start()
     {
-        spawnFences();
-        spawnApple();
-        spawnCoins();
+        if (!isInitialized)
+        {
+            SpawnChunkContent();
+            isInitialized = true;
+        }
     }
+    
     public void Init(LevelGenerator levelGenerator, ScoreManager scoreManager)
     {
         this.levelGen = levelGenerator;
         this.scoreManager = scoreManager;
+    }
+    
+
+    void OnEnable()
+    {
+        if (isInitialized)
+        {
+            ResetChunk();
+        }
+    }
+    
+
+    void ResetChunk()
+    {
+        ClearSpawnedObjects();
+        availableLanes.Clear();
+        availableLanes.AddRange(new int[] { 0, 1, 2 });
+
+        SpawnChunkContent();
+    }
+    
+    void ClearSpawnedObjects()
+    {
+        foreach (GameObject obj in spawnedObjects)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+        spawnedObjects.Clear();
+    }
+    
+    void SpawnChunkContent()
+    {
+        spawnFences();
+        spawnApple();
+        spawnCoins();
     }
     void spawnFences()
     {
@@ -33,10 +78,9 @@ public class Chunk : MonoBehaviour
             if (availableLanes.Count <= 0) break;
             int selectedLane = SelectRandomLane(availableLanes);
             Vector3 spawnPosition1 = new Vector3(lanes[selectedLane], transform.position.y, transform.position.z);
-            Instantiate(fencePrefab, spawnPosition1, Quaternion.identity, this.transform);
-
+            GameObject fence = Instantiate(fencePrefab, spawnPosition1, Quaternion.identity, this.transform);
+            spawnedObjects.Add(fence);
         }
-
     }
 
     int SelectRandomLane(List<int> availableLanes)
@@ -47,6 +91,7 @@ public class Chunk : MonoBehaviour
         return selectedLane;
     }
 
+
     void spawnApple()
     {
         if (Random.value > appleSpawnChance || availableLanes.Count <= 0) return;
@@ -55,10 +100,9 @@ public class Chunk : MonoBehaviour
         GameObject appleObj = Instantiate(applePrefab, spawnPosition1, Quaternion.identity, this.transform);
         Apple apple = appleObj.GetComponent<Apple>();
         apple.Init(levelGen);
-        
-
+        spawnedObjects.Add(appleObj); 
     }
-
+  
     void spawnCoins()
     {
         if (Random.value > coinSpawnChance || availableLanes.Count <= 0) return;
@@ -71,9 +115,8 @@ public class Chunk : MonoBehaviour
             float spawnPositionZ = topOfChunkZ - (i * coinSeparationLength);
             Vector3 spawnPosition1 = new Vector3(lanes[selectedLane], transform.position.y, spawnPositionZ);
             GameObject coinObj = Instantiate(coinPrefab, spawnPosition1, Quaternion.identity, this.transform);
-            
+            spawnedObjects.Add(coinObj); 
         }
     }
-    
 
 }
